@@ -15,24 +15,35 @@ If the array is already in descending order, it reverses the array to produce th
 5. **Reverse the Suffix:** Reverse the elements after the pivot to obtain the next permutation.
 6. **Finish:** The array now contains the next permutation.
 
-## 🔀 Flowchart
-
 ```mermaid
 flowchart TD
     A([Start]) --> B[Initialize pivot = -1]
-    B --> C[Scan array from right to left]
-    C --> D{A[i] < A[i+1]?}
-    D -- Yes --> E[Set pivot = i]
-    D -- No --> F{More elements to check?}
-    F -- Yes --> C
-    F -- No --> G{Pivot == -1?}
-    E --> G
-    G -- Yes --> H[Reverse entire array]
-    H --> K([End])
-    G -- No --> I[Find rightmost element greater than pivot]
-    I --> J[Swap pivot and that element]
-    J --> L[Reverse suffix after pivot]
-    L --> K
+    B --> C[Set i = n - 2]
+    C --> D{i >= 0?}
+    D -- Yes --> E{A[i] < A[i + 1]?}
+    E -- Yes --> F[Set pivot = i]
+    F --> I{pivot == -1?}
+    E -- No --> G[Decrement i]
+    G --> D
+    D -- No --> I
+
+    I -- Yes --> J[Reverse entire array]
+    J --> Z([End])
+
+    I -- No --> K[Set i = n - 1]
+    K --> L{i > pivot?}
+    L -- Yes --> M{A[i] > A[pivot]?}
+    M -- No --> N[Decrement i]
+    N --> L
+    M -- Yes --> O[Swap A[i] and A[pivot]]
+    O --> R[Set i = pivot + 1 and j = n - 1]
+
+    L -- No --> R
+    R --> S{i < j?}
+    S -- Yes --> T[Swap A[i] and A[j]]
+    T --> U[Increment i and decrement j]
+    U --> S
+    S -- No --> Z
 ```
 
 ## 💻 Example
